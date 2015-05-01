@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  get 'annexes/video', as: :Video
+
+  get 'annexes/self_assessment', as: :SelfAssessment
+
+  get 'annexes/engineering_report', as: :EngineeringReport
+
+  get 'annexes/generated_code', as: :GeneratedCode
+
   get 'attachments/attachment1', as: :attachment1
 
   get 'attachments/attachment2', as: :attachment2
@@ -8,8 +16,6 @@ Rails.application.routes.draw do
 
   get 'attachments/attachment4', as: :attachment4
 
-  resources :attachments, only: :index
-
-  root 'attachments#index'
+  root 'home#index'
 
 end

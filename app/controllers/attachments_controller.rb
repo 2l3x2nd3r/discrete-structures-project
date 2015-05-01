@@ -1,7 +1,4 @@
 class AttachmentsController < ApplicationController
-  def index
-  end
-
   def attachment1
   end
 

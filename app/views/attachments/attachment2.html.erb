@@ -2,32 +2,53 @@
 <br>
 
 <div class="row">
-  <div class="span5">
-    <%= form_tag(:attachment2, :method => "get", id: "search-form") do %>
+  <div class="span12">
+    <h3> Listar todos los subconjuntos de K elementos, formados a partir de los elementos del conjunto S = {1,2,3,...,n}, que no contengan elementos consecutivos.</h3>
+    <div class="span5">
+      <div class="col-lg-8">
 
-      <%= label_tag 'Array S: ', nil, class: 'label label-default' %>
-      <%= text_field_tag :array, params[:array], placeholder: "Array separated by comma" %>
+        <%= form_tag(:attachment2, :method => "get", id: "search-form") do %>
 
-      <%= label_tag 'k: ', nil, class: 'label label-default' %>
-      <%= text_field_tag :k, params[:k], title: "Should be less to array size" %>
+          <div class="form-group">
+            <%= label_tag 'Array   S:', nil, class: 'col-lg-4 control-label' %>
+            <div class="col-lg-8">
+              <%= text_field_tag :array, params[:array], placeholder: "Array separated by comma" %>
+            </div>
+          </div>
 
-      <br><br>
-      <%= submit_tag "Search", :name => nil, class: 'btn btn-default' %>
-    <% end %>
-  </div>
-  <div class="span7">
-    <table class="table-bordered table-striped table-condensed table-hover">
-      <% @selectables.each do |selectable| %>
-        <tr>
-          <td>
-            <center><p><%= selectable %></p></center>
-          </td> 
-        </tr>
+          <br><br>
+
+          <div class="form-group">
+            <%= label_tag 'k: ', nil, class: 'col-lg-4 control-label' %>
+            <div class="col-lg-8">
+              <%= text_field_tag :k, params[:k], placeholder: "Should be less to array size" %>
+            </div>
+          </div>
+
+          <br><br>
+
+          <div class="form-group">
+            <div class="col-lg-10">
+              <%= submit_tag "Search", :name => nil, class: 'btn btn-default' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="span5">
+      <table class="table-bordered table-striped table-condensed table-hover">
+        <% @selectables.each do |selectable| %>
+          <tr>
+            <td>
+              <center><h3><%= selectable.to_s.gsub!('[','').gsub!(']','') %></h3></center>
+            </td> 
+          </tr>
+        <% end %>
+      </table>
+      <% if @selectables != [] %>
+        <%= will_paginate @selectables, renderer: BootstrapPagination::Rails, inner_window: 1, outer_window: 0  %>
       <% end %>
-    </table>
-    <% if @selectables != [] %>
-      <%= will_paginate @selectables, renderer: BootstrapPagination::Rails, inner_window: 1, outer_window: 0  %>
-    <% end %>
+    </div>
   </div>
 </div>
 
