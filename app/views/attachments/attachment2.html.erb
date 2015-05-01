@@ -1,27 +1,27 @@
-
 <br>
 
 <div class="row">
-  <div class="span12">
+  <div class="span16">
     <h3> Listar todos los subconjuntos de K elementos, formados a partir de los elementos del conjunto S = {1,2,3,...,n}, que no contengan elementos consecutivos.</h3>
+    <br><br><br><br>
     <div class="span5">
       <div class="col-lg-8">
 
         <%= form_tag(:attachment2, :method => "get", id: "search-form") do %>
 
           <div class="form-group">
-            <%= label_tag 'Array   S:', nil, class: 'col-lg-4 control-label' %>
-            <div class="col-lg-8">
-              <%= text_field_tag :array, params[:array], placeholder: "Array separated by comma" %>
+            <%= label_tag 'S:', nil, class: 'col-lg-2 control-label' %>
+            <div class="col-lg-10">
+              <%= text_field_tag :array, params[:array], placeholder: "Array separated by comma", size: 30 %>
             </div>
           </div>
 
           <br><br>
 
           <div class="form-group">
-            <%= label_tag 'k: ', nil, class: 'col-lg-4 control-label' %>
-            <div class="col-lg-8">
-              <%= text_field_tag :k, params[:k], placeholder: "Should be less to array size" %>
+            <%= label_tag 'k: ', nil, class: 'col-lg-2 control-label' %>
+            <div class="col-lg-10">
+              <%= text_field_tag :k, params[:k], placeholder: "Should be less to array size", size: 30 %>
             </div>
           </div>
 
@@ -46,9 +46,7 @@
         <% end %>
       </table>
       <% if @selectables != [] %>
-        <%= will_paginate @selectables, renderer: BootstrapPagination::Rails, inner_window: 1, outer_window: 0  %>
+        <%= will_paginate @selectables, renderer: BootstrapPagination::Rails %>
       <% end %>
     </div>
   </div>
-</div>
-
