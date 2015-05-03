@@ -7,17 +7,26 @@ class ApplicationController < ActionController::Base
     partitions = []
     array.each_cons(k) { |item| partitions << item }
     selectables = []
+    no_selectables = []
 
     partitions.each do |partition|
-      i = partition.first
-      n = partition.last + 1
-      num1 = partition.reduce(:+)
-      dist = n - i
-      num2 = (n * (n + 1)) / (2) - (i * (i + 1)) / (2) - dist
-      if num1 != num2
+      c1 = consecutivo?(partition, 1)
+      c2 = consecutivo?(partition, -1)
+      if c1 or c2
+        no_selectables << partition
+      else
         selectables << partition
       end
     end
-    selectables
+    [selectables, no_selectables]
+  end
+
+  def consecutivo?(array, signo)
+    array.each_with_index do |item, i|
+      if((item + 1*signo) != array[i + 1] && i < array.size - 1)
+        return false
+      end
+    end
+    true
   end
 end
