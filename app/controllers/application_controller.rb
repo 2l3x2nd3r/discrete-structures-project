@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-
+  
   def attachment2_solution(array, k)
     partitions = []
     array.each_cons(k) { |item| partitions << item }
@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
     no_selectables = []
 
     partitions.each do |partition|
-      c1 = consecutivo?(partition, 1)
-      c2 = consecutivo?(partition, -1)
+      c1 = consecutive?(partition, 1)
+      c2 = consecutive?(partition, -1)
       if c1 or c2
         no_selectables << partition
       else
@@ -21,7 +21,9 @@ class ApplicationController < ActionController::Base
     [selectables, no_selectables]
   end
 
-  def consecutivo?(array, signo)
+  private
+
+  def consecutive?(array, signo)
     array.each_with_index do |item, i|
       if((item + 1*signo) != array[i + 1] && i < array.size - 1)
         return false
