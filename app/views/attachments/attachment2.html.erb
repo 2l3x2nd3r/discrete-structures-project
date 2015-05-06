@@ -11,9 +11,9 @@
         <%= form_tag(:attachment2, :method => "get", id: "search-form2") do %>
 
           <div class="form-group">
-            <%= label_tag 'S:', nil, class: 'col-lg-2 control-label' %>
+            <%= label_tag 'N:', nil, class: 'col-lg-2 control-label' %>
             <div class="col-lg-10">
-              <%= text_field_tag :array, params[:array], placeholder: "Array separated by comma", size: 30 %>
+              <%= text_field_tag :n, params[:n], placeholder: "Any Integer", size: 30 %>
             </div>
           </div>
 
@@ -22,7 +22,7 @@
           <div class="form-group">
             <%= label_tag 'k: ', nil, class: 'col-lg-2 control-label' %>
             <div class="col-lg-10">
-              <%= text_field_tag :k, params[:k], placeholder: "Should be less to array size", size: 30 %>
+              <%= text_field_tag :k, params[:k], placeholder: "Should be less to N value", size: 30 %>
             </div>
           </div>
 
@@ -37,39 +37,20 @@
       </div>
     </div>
 
-    <div class="span4">
-      <% unless @no_selectables.empty? %>
-        <h3>No Consecutive</h3>
-      <% end %>
+    <div class="span8">
       <table class="table-bordered table-striped table-condensed table-hover">
-        <% @selectables.each do |selectable| %>
+        <% @selectables.each do |sub_selectables| %>
           <tr>
-            <td>
-              <center><h3><%= selectable.to_s.gsub!('[','').gsub!(']','') %></h3></center>
-            </td> 
+            <% sub_selectables.each do |selectable| %>
+              <td>
+                <center><h3><%= selectable.to_s.gsub!('[','').gsub!(']','') %></h3></center>
+              </td> 
+            <% end %> 
           </tr>
         <% end %>
       </table>
       <% unless @selectables.empty? %>
-        <%= will_paginate @selectables, renderer: BootstrapPagination::Rails, param_name: 'page1' %>
-      <% end %>
-    </div>
-
-    <div class="span4">
-      <% unless @no_selectables.empty? %>
-        <h3>Consecutive</h3>
-      <% end %>
-      <table class="table-bordered table-striped table-condensed table-hover">
-        <% @no_selectables.each do |selectable| %>
-          <tr>
-            <td>
-              <center><h3><%= selectable.to_s.gsub!('[','').gsub!(']','') %></h3></center>
-            </td> 
-          </tr>
-        <% end %>
-      </table>
-      <% unless @no_selectables.empty? %>
-        <%= will_paginate @no_selectables, renderer: BootstrapPagination::Rails, param_name: 'page2' %>
+        <%= will_paginate @selectables, renderer: BootstrapPagination::Rails %>
       <% end %>
     </div>
   </div>

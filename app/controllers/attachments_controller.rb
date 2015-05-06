@@ -4,14 +4,11 @@ class AttachmentsController < ApplicationController
   end
 
   def attachment2
-    if params[:array]
-      array = params[:array].split(',').map! { |item| item.to_i }
-      k = params[:k] != '' ? params[:k].to_i : 2
-      @selectables = Attachment.attachment2_solution(array, k)[0].paginate(page: params[:page1], per_page: 3)
-      @no_selectables = Attachment.attachment2_solution(array, k)[1].paginate(page: params[:page2], per_page: 3)
+    if params[:n]
+      k = params[:k] != '' ? params[:k].to_i : 3
+      @selectables = Attachment.attachment2_solution(params[:n].to_i, k).each_slice(10).to_a.paginate(page: params[:page], per_page: 10)
     else
       @selectables = []
-      @no_selectables = []
     end
   end
 

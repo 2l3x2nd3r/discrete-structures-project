@@ -1,8 +1,8 @@
 module Attachment
 
-  def self.attachment2_solution(array, k)
-    partitions = []
-    array.each_cons(k) { |item| partitions << item }
+  def self.attachment2_solution(n, k)
+
+    partitions = Array.new(n) { |i| i + 1 }.permutation(k).to_a
     selectables = []
     no_selectables = []
 
@@ -15,10 +15,10 @@ module Attachment
         selectables << partition
       end
     end
-    [selectables, no_selectables]
+    selectables
   end
 
-  def Attachment.attachment3_solution(array, k)
+  def self.attachment3_solution(array, k)
     n = array.size - 1
     max = array.max
     array.map! { max }
@@ -50,7 +50,7 @@ module Attachment
     true
   end
 
-  def greater_than_condition?(array)
+  def self.greater_than_condition?(array)
     array.each_with_index do |item, i|
       if i < array.size - 1
         return false if item > array[i + 1]
