@@ -13,7 +13,7 @@
           <div class="form-group">
             <%= label_tag 'N:', nil, class: 'col-lg-2 control-label' %>
             <div class="col-lg-10">
-              <%= text_field_tag :n, params[:n], placeholder: "Any Integer", size: 30 %>
+              <%= text_field_tag :n, params[:n], placeholder: "Integer in 1..14", size: 30 %>
             </div>
           </div>
 
@@ -22,7 +22,7 @@
           <div class="form-group">
             <%= label_tag 'k: ', nil, class: 'col-lg-2 control-label' %>
             <div class="col-lg-10">
-              <%= text_field_tag :k, params[:k], placeholder: "Should be less to N value", size: 30 %>
+              <%= text_field_tag :k, params[:k], placeholder: "Should be less to N value and 6", size: 30 %>
             </div>
           </div>
 
@@ -38,19 +38,23 @@
     </div>
 
     <div class="span8">
-      <table class="table-bordered table-striped table-condensed table-hover">
-        <% @selectables.each do |sub_selectables| %>
-          <tr>
-            <% sub_selectables.each do |selectable| %>
-              <td>
-                <center><h3><%= selectable.to_s.gsub!('[','').gsub!(']','') %></h3></center>
-              </td> 
-            <% end %> 
-          </tr>
+      <% if @message %>
+        <center><h3><%= @message %></h3></center>
+      <% else %>
+        <table class="table-bordered table-striped table-condensed table-hover">
+          <% @selectables.each do |sub_selectables| %>
+            <tr>
+              <% sub_selectables.each do |selectable| %>
+                <td>
+                  <center><h3><%= selectable.to_s.gsub!('[','').gsub!(']','') %></h3></center>
+                </td> 
+              <% end %> 
+            </tr>
+          <% end %>
+        </table>
+        <% unless @selectables.empty? %>
+          <%= will_paginate @selectables, renderer: BootstrapPagination::Rails %>
         <% end %>
-      </table>
-      <% unless @selectables.empty? %>
-        <%= will_paginate @selectables, renderer: BootstrapPagination::Rails %>
       <% end %>
     </div>
   </div>
