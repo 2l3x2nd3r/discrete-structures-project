@@ -2,7 +2,13 @@ class AttachmentsController < ApplicationController
  
   def attachment1
     if params[:n]
-      @selectables = Attachment.attachment1_solution(params[:n].to_i).each_slice(5).to_a.paginate(page: params[:page], per_page: 5)
+      n = params[:n].to_i
+      if n < 51
+        @selectables = Attachment.attachment1_solution(n).each_slice(5).to_a.paginate(page: params[:page], per_page: 5)
+      else
+        @selectables = []
+        @message = "N should be less than 51"
+      end
     else
       @selectables = []
     end
