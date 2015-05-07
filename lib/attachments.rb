@@ -21,18 +21,6 @@ module Attachment
     selectables
   end
 
-  def self.attachment2_solution(n, k)
-    selectables = []
-    partitions = Array.new(n) { |i| i + 1 }.permutation(k) do |partition|
-      c1 = self.consecutive?(partition, 1)
-      c2 = self.consecutive?(partition, -1)
-      unless c1 or c2
-        selectables << partition
-      end
-    end
-    selectables
-  end
-
   def self.attachment3_solution(array, k)
     n = array.size - 1
     max = array.max
