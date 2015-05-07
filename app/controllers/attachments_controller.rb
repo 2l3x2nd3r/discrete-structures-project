@@ -1,6 +1,11 @@
 class AttachmentsController < ApplicationController
+ 
   def attachment1
-    @selectables = []
+    if params[:n]
+      @selectables = Attachment.attachment1_solution(params[:n].to_i).each_slice(5).to_a.paginate(page: params[:page], per_page: 5)
+    else
+      @selectables = []
+    end
   end
 
   def attachment2

@@ -28,14 +28,16 @@
     </div>
     <div class="span5">
       <table class="table-bordered table-striped table-condensed table-hover">
-        <% @selectables.each do |selectable| %>
-          <tr>
-            <td>
-              <center><h3><%= selectable.to_s.gsub!('[','').gsub!(']','') %></h3></center>
-            </td> 
-          </tr>
-        <% end %>
-      </table>
+          <% @selectables.each do |sub_selectables| %>
+            <tr>
+              <% sub_selectables.each do |selectable| %>
+                <td>
+                  <center><h3><%= selectable.to_s.gsub!('[','').gsub!(']','') %></h3></center>
+                </td> 
+              <% end %> 
+            </tr>
+          <% end %>
+        </table>
       <% if @selectables != [] %>
         <%= will_paginate @selectables, renderer: BootstrapPagination::Rails %>
       <% end %>
