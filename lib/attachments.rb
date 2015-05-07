@@ -1,17 +1,11 @@
 module Attachment
 
   def self.attachment2_solution(n, k)
-
-    partitions = Array.new(n) { |i| i + 1 }.permutation(k).to_a
     selectables = []
-    no_selectables = []
-
-    partitions.each do |partition|
+    partitions = Array.new(n) { |i| i + 1 }.permutation(k) do |partition|
       c1 = self.consecutive?(partition, 1)
       c2 = self.consecutive?(partition, -1)
-      if c1 or c2
-        no_selectables << partition
-      else
+      unless c1 or c2
         selectables << partition
       end
     end
