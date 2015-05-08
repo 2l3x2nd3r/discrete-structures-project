@@ -2,10 +2,12 @@
   <div class="bs-component">
     <div class="jumbotron">
       <center><h1>Self-Assessment</h1></center>
-      <center><p>Attachment 1 = <%= @assessment1 %></p></center>
-      <center><p>Attachment 2 = <%= @assessment2 %></p></center>
-      <center><p>Attachment 3 = <%= @assessment3 %></p></center>
-      <center><p>Attachment 4 = <%= @assessment4 %></p></center>
+      <br>
+      <center><p>Attachment 1 = <%= @assessment1 %></p></center><br>
+      <center><p>Attachment 2 = <%= @assessment2 %></p></center><br>
+      <center><p>Attachment 3 = <%= @assessment3 %></p></center><br>
+      <center><p>Attachment 4 = <%= @assessment4 %></p></center><br>
+      <br><br>
       <% avg = (@assessment1 + @assessment2 + @assessment3 + @assessment4)/4 %>
       <center><h3>Self-Assessment Average = <%= avg %></h3></center>
     </div>
