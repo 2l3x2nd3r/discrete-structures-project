@@ -22,22 +22,11 @@ module Attachment
   end
 
   def self.attachment3_solution(array, k)
-    n = array.size - 1
-    max = array.max
-    array.map! { max }
-
-    unless greater_than_condition?(array)
-
-    end
-
+    pre_selectables = []
     selectables = []
-    while array.first < k
-      while array[n] < k
-        if greater_than_condition?(array)
-          sum = array.reduce :+
-          selectables << array if sum == k
-        end
-      end
+    self.attachment1_solution(k).each { |item| pre_selectables << item.reverse if item.reduce(:+) == k and item.size == array.size }
+    pre_selectables.each do |pre_selectable|
+      selectables << pre_selectable if self.greater_than_condition?(array, pre_selectable)
     end
     selectables
   end
@@ -53,11 +42,11 @@ module Attachment
     true
   end
 
-  def self.greater_than_condition?(array)
-    array.each_with_index do |item, i|
-      if i < array.size - 1
-        return false if item > array[i + 1]
-      end     
+  def self.greater_than_condition?(array, pre_selectable)
+    pre_selectable.each_with_index do |item, i|
+      if item < array[i]
+        return false
+      end    
     end
     true
   end

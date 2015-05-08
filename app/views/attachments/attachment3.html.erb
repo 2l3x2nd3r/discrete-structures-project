@@ -22,7 +22,7 @@
           <div class="form-group">
             <%= label_tag 'k: ', nil, class: 'col-lg-2 control-label' %>
             <div class="col-lg-10">
-              <%= text_field_tag :k, params[:k], placeholder: "Any valor", size: 30 %>
+              <%= text_field_tag :k, params[:k], placeholder: "Integer in 1..50", size: 30 %>
             </div>
           </div>
 
@@ -37,16 +37,22 @@
       </div>
     </div>
     <div class="span5">
-      <table class="table-bordered table-striped table-condensed table-hover">
-        <% @selectables.each do |selectable| %>
-          <tr>
-            <td>
-              <center><h3><%= selectable.to_s.gsub!('[','').gsub!(']','') %></h3></center>
-            </td> 
-          </tr>
-        <% end %>
-      </table>
-      <% if @selectables != [] %>
+      <% if @selectables.empty? %>
+        <% unless @on_index %>
+          <center><h3>No Solution for that conditions</h3></center>
+        <% end %> 
+      <% else %>
+        <table class="table-bordered table-striped table-condensed table-hover">
+          <% @selectables.each do |sub_selectables| %>
+            <tr>
+              <% sub_selectables.each do |selectable| %>
+                <td>
+                  <center><h3><%= selectable.to_s.gsub!('[','').gsub!(']','') %></h3></center>
+                </td> 
+              <% end %> 
+            </tr>
+          <% end %>
+        </table>
         <%= will_paginate @selectables, renderer: BootstrapPagination::Rails %>
       <% end %>
     </div>
