@@ -6,4 +6,5 @@ class ApplicationController < ActionController::Base
   $last_selectables1 = []
   $last_selectables2 = []
   $last_selectables3 = []
+  
 end
