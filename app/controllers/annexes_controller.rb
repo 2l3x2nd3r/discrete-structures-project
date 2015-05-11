@@ -6,7 +6,7 @@ class AnnexesController < ApplicationController
     @assessment1 = 5
     @assessment2 = 5
     @assessment3 = 5
-    @assessment4 = 5
+    @assessment4 = 4
   end
 
   def engineering_report

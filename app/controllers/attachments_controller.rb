@@ -67,5 +67,17 @@ class AttachmentsController < ApplicationController
   end
 
   def attachment4
+    if params[:exercise]
+      if params[:page]
+        @selectables = $last_selectables4
+        @selectables = @selectables.paginate(page: params[:page], per_page: 5)
+      else
+        @selectables = Attachment.attachment4_solution(params[:exercise]).each_slice(5).to_a
+        $last_selectables4 = @selectables
+        @selectables = @selectables.paginate(page: params[:page], per_page: 5)
+      end
+    else
+      @selectables = []
+    end
   end
 end
